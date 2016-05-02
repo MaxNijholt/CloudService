@@ -1,5 +1,39 @@
 extends layout
 
-block content
-  h1= title
-  p Welcome to #{title}
+block content   
+    
+    // CONTENT
+    #content
+    
+        h1= title
+        p Welcome to ChampionServices
+    
+        // LOGIN
+        h2 Login
+        #login
+            fieldset
+                input#usename(type='username', placeholder='Username')
+                input#password(type='password', placeholder='Password')
+        // /LOGIN
+        
+        // ADD CHAMPION
+        h2 Add Champion
+        #addChampion
+            fieldset
+                input#inputChampionName(type='text', placeholder='Name')
+                input#inputChampionDescription(type='text', placeholder='Description')
+                br
+                button#btnAddChampion Add Champion
+        // /ADD CHAMPION
+
+        // CHAMPIONS
+        h2 Champions List
+        #championsList
+            table
+                thead
+                    th Name
+                    th Description
+                tbody
+        // /CHAMPIONS
+
+    // /CONTENT

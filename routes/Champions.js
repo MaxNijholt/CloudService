@@ -19,7 +19,7 @@ router.get('/', function(req, res) {
             name: "Champ2",
             color: "vistick"
         },
-        Champ2: {
+        Champ3: {
             name: "Champ3",
             color: "vistick"
         }
