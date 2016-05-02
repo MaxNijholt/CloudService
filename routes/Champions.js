@@ -13,15 +13,15 @@ router.get('/', function(req, res) {
     res.json({
         Champ1: {
             name: "Champ1",
-            color: "vistick"
+            champ: "Varus"
         },
         Champ2: {
             name: "Champ2",
-            color: "vistick"
+            champ: "Teemo"
         },
         Champ3: {
             name: "Champ3",
-            color: "vistick"
+            champ: "Galio"
         }
     });
 });

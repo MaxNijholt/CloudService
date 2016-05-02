@@ -24,8 +24,8 @@ function getAllChampions() {
         // For each item in our JSON, add a table row and cells to the content string
         $.each(data, function(){
             tableContent += '<tr>';
-            tableContent += '<td><a href="#" class="linkshowroom" rel="' + this.name + '">' + this.name + '</a></td>';
-            tableContent += '<td>' + this.description + '</td>';
+            tableContent += '<td>' + this.name + '</td>';
+            tableContent += '<td>' + this.champ + '</td>';
             tableContent += '</tr>';
         });
 

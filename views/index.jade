@@ -1,39 +1,57 @@
 extends layout
 
-block content   
-    
-    // CONTENT
-    #content
-    
-        h1= title
-        p Welcome to ChampionServices
-    
-        // LOGIN
-        h2 Login
-        #login
-            fieldset
-                input#usename(type='username', placeholder='Username')
-                input#password(type='password', placeholder='Password')
-        // /LOGIN
+block content
         
-        // ADD CHAMPION
-        h2 Add Champion
-        #addChampion
-            fieldset
-                input#inputChampionName(type='text', placeholder='Name')
-                input#inputChampionDescription(type='text', placeholder='Description')
-                br
-                button#btnAddChampion Add Champion
-        // /ADD CHAMPION
+    nav.navbar.navbar-default( role="navigation" )
+        .navbar-header
+            a.navbar-brand()= title
 
-        // CHAMPIONS
-        h2 Champions List
-        #championsList
-            table
-                thead
-                    th Name
-                    th Description
-                tbody
-        // /CHAMPIONS
+    .container-fluid
+        .row
+            .col-md-3
+                .panel.panel-default.loginPanel
+                    .panel-heading 
+                        h4 Login
+                    .panel-body 
+                        #login
+                        fieldset
+                            form-group
+                                input#usename(type='username', class="form-control", placeholder='Username')
+                            form-group
+                                input#password(type='password', class="form-control", placeholder='Password')
+                            button#login(type='submit', class="form-control btn btn-default") Login
+                            
+            .col-md-3
+                .panel.panel-default
+                    .panel-heading 
+                        h4 Add Champion
+                    .panel-body 
+                        #addChampion
+                        fieldset
+                            form-group
+                                input#inputChampionName(type='text', class="form-control", placeholder='Name')
+                            .dropdown
+                                button#inputChampionChampion(type="button" class="btn.btn-default dropdown-toggle form-control" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true") Champion Select
+                                    span.caret
+                                ul(class="dropdown-menu dropdown-menu-right")
+                                    li 
+                                        a(href="#") Action
+                                    li 
+                                        a(href="#") Another action 
+                                    li 
+                                        a(href="#") Something else here 
+                                    li      
+                                        a(href="#") Action                          
+                            button#btnAddChampion(type='submit', class="form-control btn btn-default") Add Champion
 
-    // /CONTENT
+            .col-md-6      
+                .panel.panel-default
+                    .panel-heading 
+                        h4 Champions List
+                    .panel-body 
+                        #championsList
+                            table.table
+                                thead
+                                    th Name
+                                    th Champion
+                                tbody
