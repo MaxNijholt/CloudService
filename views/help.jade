@@ -1,0 +1,82 @@
+extends layout
+
+block content
+        
+    nav.navbar.navbar-default( role="navigation" )
+        .navbar-header
+            a.navbar-brand()= title
+        .collapse.navbar-collapse.navbar-right
+            ul.nav.navbar-nav
+                li
+                    a(href="/") Home
+
+    .container-fluid
+        .row
+            .col-md-12      
+                .panel.panel-default
+                    .panel-heading 
+                        h4 API HELP
+                    .panel-body 
+                        #urlList
+                            table.table
+                                thead
+                                    th Name
+                                    th URL
+                                    th Description
+                                    th Filtering
+                                    th JSON
+                                tbody
+                                    tr
+                                        td GET Buddies
+                                        td /Buddies
+                                        td Get a list of all the buddies.
+                                        td 
+                                            ul(style="list-style-type: none; padding:0")
+                                                li name
+                                                li champion
+                                                li username
+                                        td
+                                    tr
+                                        td POST Buddy
+                                        td /Buddies
+                                        td Create a new buddy.
+                                        td 
+                                        td
+                                            ul(style="list-style-type: none; padding:0")
+                                                li {
+                                                li     "name"="value",
+                                                li     "champion"="value",
+                                                li     "username"="value"
+                                                li }
+                                    tr
+                                        td GET Buddy
+                                        td /Buddies/:name
+                                        td Get the buddy with the given name.
+                                        td
+                                        td
+                                    tr
+                                        td PUT Buddy
+                                        td /Buddies/:name
+                                        td Update the buddy with the given name.
+                                        td 
+                                        td
+                                            ul(style="list-style-type: none; padding:0")
+                                                li {
+                                                li     "name"="value",
+                                                li     "champion"="value",
+                                                li     "username"="value"
+                                                li }
+                                    tr
+                                        td DELETE Buddy
+                                        td /Buddies/:name
+                                        td Delete the buddy with the given name.
+                                        td
+                                        td
+                                    tr
+                                        td GET Champions
+                                        td /Champions
+                                        td Get a list of all champions, retrieved from 
+                                            a(href="https://developer.riotgames.com/") https://developer.riotgames.com/.
+                                        td 
+                                        td
+        

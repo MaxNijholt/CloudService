@@ -13,17 +13,20 @@ class Auth extends Base {
      * Dealing with user login and logouts
      * @param router
      */
-    constructor() {
+    constructor(app) {
         super(router);
 
         // apply middleware if necessary
         router.use(function (req, res, next) {
-            console.log('auth method called');
+            // console.log('auth method called');
             next();
         });
 
         // add routes to router
         this.resolve();
+
+        // commit router to application
+        app.use('/auth', router);
     }
 
     /**
@@ -41,8 +44,6 @@ class Auth extends Base {
             'username', 'password'
         ], [], this.postUser.bind(this));
 
-        // get current authenticated user
-        this.regRoute('get', '/users/current', [], [], this.getCurrentUser.bind(this), true);
     }
 
     /**
@@ -61,14 +62,14 @@ class Auth extends Base {
             }
 
             // create new token
-            var token = user.generateToken();
+            user.generateToken();
             user.save();
 
             // send success
             response.json({
                 success: true,
                 data: {
-                    token: token
+                    token: user.token
                 }
             });
         }).apply(this, [request, response]);
@@ -115,17 +116,6 @@ class Auth extends Base {
         });
     }
 
-    /**
-     * Get the current user
-     * @param request
-     * @param input
-     * @param response
-     */
-    getCurrentUser(request, input, response) {
-        response.json({
-            username: request.user.username
-        });
-    }
 }
 
-module.exports = new Auth();
+module.exports = Auth;

@@ -6,6 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
+var help = require('./routes/Help');
+var buddies = require('./routes/Buddies');
+var champions = require('./routes/Champions');
 
 var app = express();
 
@@ -31,8 +34,11 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', routes);
+app.use('/Help', help);
+app.use('/Buddies', buddies);
+app.use('/Champions', champions);
 
-app.use('/auth', require('./routes/Auth').router);
+new (require('./routes/Auth'))(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
