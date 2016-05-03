@@ -26,7 +26,7 @@ function getAllChampions() {
         $.each(data, function(){
             tableContent += '<tr>';
             tableContent += '<td>' + this.name + '</td>';
-            tableContent += '<td>' + this.description + '</td>';
+            tableContent += '<td>' + this.title + '</td>';
             tableContent += '</tr>';
         });
 
