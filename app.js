@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 
 var routes = require('./routes/index');
+var buddies = require('./routes/Buddies');
 var champions = require('./routes/Champions');
 
 var app = express();
@@ -19,13 +20,6 @@ app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveU
 
 app.use(passport.initialize());
 app.use(passport.session());
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
-
-passport.deserializeUser(function(user, done) {
-  done(null, user);
-});
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -45,6 +39,7 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', routes);
+app.use('/Buddies', buddies);
 app.use('/Champions', champions);
 
 new (require('./routes/Auth'))(app);

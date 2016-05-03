@@ -9,7 +9,7 @@ const tokenLength = 50;
 var userSchema = new Schema({
     username: {
         type: String,
-        required: true,
+     //   required: true,
         minlength: [5, 'Username too short'],
         maxlength: [20, 'Username too long']
     },
@@ -22,8 +22,7 @@ var userSchema = new Schema({
     google : {
         id : String,
         token : String,
-        email : String,
-        name : String
+        email : String
     }
 });
 

@@ -1,79 +1,23 @@
 var express = require('express');
+var request = require('request-json');
 var router = express.Router();
+
+
+var api = {};
+api.globalURL = "https://global.api.pvp.net";
+api.allChamps = "/api/lol/static-data/euw/v1.2/champion?";
+api.apiKey = "api_key=000e525c-65cf-4739-a963-2f18dec526cc";
+
+var client = request.createClient(api.globalURL + api.allChamps + api.apiKey);
 
 /*
  * GET champions.
  */
 router.get('/', function(req, res) {
-    // var db = req.db;
-    // var collection = db.get('rooms');
-    // collection.find({},{},function(e,docs){
-    //     res.json(docs);
-    // });
-    res.json({
-        Champ1: {
-            name: "Champ1",
-            champ: "Varus"
-        },
-        Champ2: {
-            name: "Champ2",
-            champ: "Teemo"
-        },
-        Champ3: {
-            name: "Champ3",
-            champ: "Galio"
-        }
+    client.get('', function(err, results, body) {
+        if (err) return console.error(err);
+        res.json(body.data);
     });
 });
-
-/*
- * POST to champions.
- */
-router.post('/', function(req, res) {
-    var db = req.db;
-    var collection = db.get('rooms');
-    collection.insert(req.body, function(err, result){
-        res.send(
-            (err === null) ? { msg: '' } : { msg: err }
-        );
-    });
-});
-
-/*
- * DELETE to champions.
- */
-router.delete('/:name', function(req, res) {
-    var db = req.db;
-    var collection = db.get('rooms');
-    var roomToDelete = req.params.name;
-    collection.remove({ 'name' : roomToDelete }, function(err) {
-        res.send((err === null) ? { msg: '' } : { msg:'error: ' + err });
-    });
-});
-
-/*
- * PUT to champions.
- */
-router.put('/:name', function(req, res) {
-    var db = req.db;
-    var collection = db.get('rooms');
-    var roomToUpdate = req.params.name;
-    collection.update({ 'name' : roomToUpdate }, req.body, function(err, result){
-        res.send((err === null) ? { msg: '' } : { msg: err });
-    });
-});
-
-/*
- * GET to champions.
- */
-router.get('/:name', function(req, res) {
-    var db = req.db;
-    var collection = db.get('lines');
-    var roomToGet = req.params.name;
-    collection.find({ 'room' : roomToGet },{},function(e,docs){
-        res.json(docs);
-    });
-});
-
 
 module.exports = router;
