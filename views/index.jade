@@ -30,11 +30,19 @@ block content
                             .panel-body 
                                 #addBuddy
                                 fieldset
-                                    form-group
-                                        input#inputBuddyName(type='text', class="form-control", placeholder='Name')
-                                    form-group
-                                        input#inputBuddyChampion(type='text', class="form-control", placeholder='Champion')                     
-                                    button#btnAddChampion(type='submit', class="form-control btn btn-default") Add Champion
+                                    .form-horizontal
+                                        .form-group
+                                            label.col-sm-2 Name
+                                            .col-sm-10
+                                                input#inputBuddyName(type='text', class="form-control", placeholder='Name')
+                                        .form-group
+                                            label.col-sm-2 Champion
+                                            .col-sm-10
+                                                input#inputBuddyChampion(type='text', class="form-control", placeholder='Champion')  
+                                                .help-block Either choose a champion from the list, or make up your own champion.                                                                                        
+                                        .form-group
+                                            .col-sm-12
+                                                button#btnAddChampion(type='submit', class="form-control btn btn-default") Add Champion
                 .row
                     .col-md-12      
                         .panel.panel-default
