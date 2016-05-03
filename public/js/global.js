@@ -20,16 +20,18 @@ function getAllChampions() {
     var tableContent = '';
 
     // jQuery AJAX call for JSON
-    $.getJSON( '/Champions', function( data ) {
+    $.getJSON( '/Buddies', function( data ) {
         // For each item in our JSON, add a table row and cells to the content string
         $.each(data, function(){
             tableContent += '<tr>';
             tableContent += '<td>' + this.name + '</td>';
-            tableContent += '<td>' + this.champ + '</td>';
+            tableContent += '<td>' + this.champion + '</td>';
+            tableContent += '<td>' + this.username + '</td>';
+            tableContent += '<td>' + this.date + '</td>';
             tableContent += '</tr>';
         });
 
         // Inject the whole content string into our existing HTML table
-        $('#championsList table tbody').html(tableContent);
+        $('#buddyList table tbody').html(tableContent);
     });
 };
