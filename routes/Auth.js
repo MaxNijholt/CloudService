@@ -38,16 +38,6 @@ class Auth extends Base {
             // Successful authentication, redirect home.
             res.redirect('/');
         });
-        
-        // twitter
-        app.get('/auth/twitter', passport.authenticate('twitter'));
-
-        app.get('/auth/twitter/callback', 
-            passport.authenticate('twitter', { failureRedirect: '/',session: false  }),
-            function(req, res) {
-            // Successful authentication, redirect home.
-            res.redirect('/');
-        });
 
         app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
 
