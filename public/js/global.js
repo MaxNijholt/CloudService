@@ -5,7 +5,7 @@ $(document).ready(function() {
     functions.getAllBuddies();
     
     // Add Buddy button click
-    $('#btnAddChampion').on('click', functions.addBuddy);
+    $('#btnAddBuddy').on('click', functions.addBuddy);
     
     // Username link click
     // $('#roomList table tbody').on('click', 'td a.linkshowroom', goToRoom);
