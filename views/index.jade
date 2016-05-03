@@ -10,6 +10,7 @@ block content
         .row
             if user
                 p.username Welcome #{user.username}
+                a(href="/logout", class="btn btn-block btn-default") Logout
             else
                 .col-md-3
                     .panel.panel-default.loginPanel

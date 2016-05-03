@@ -47,6 +47,11 @@ class Auth extends Base {
             // Successful authentication, redirect home.
             res.redirect('/');
         });
+
+        app.get('/logout', function(req, res){
+          req.logout();
+          res.redirect('/');
+        });
     }
 
     /**
