@@ -1,11 +1,11 @@
 $(document).ready(function() {
 
     // Populate the room table on initial page load
-    getAllChampions();
-    getAllBuddies();
+    functions.getAllChampions();
+    functions.getAllBuddies();
     
-    // Add Room button click
-    // $('#btnAddRoom').on('click', addRoom);
+    // Add Buddy button click
+    $('#btnAddChampion').on('click', functions.addBuddy);
     
     // Username link click
     // $('#roomList table tbody').on('click', 'td a.linkshowroom', goToRoom);
@@ -13,9 +13,9 @@ $(document).ready(function() {
 });
 
 // Functions =============================================================
-
+var functions = {};
 // Fill table with data
-function getAllChampions() {
+functions.getAllChampions = function() {
 
     // Empty content string
     var tableContent = '';
@@ -35,7 +35,7 @@ function getAllChampions() {
     });
 };
 
-function getAllBuddies() {
+functions.getAllBuddies = function() {
 
     // Empty content string
     var tableContent = '';
@@ -56,3 +56,13 @@ function getAllBuddies() {
         $('#buddyList table tbody').html(tableContent);
     });
 };
+
+functions.addBuddy = function() {
+    var name = $('#inputBuddyName').val();
+    var champion = $('#inputBuddyChampion').val();
+    
+    if(name && champion){
+        console.log("good");
+        console.log(name + " " + champion);
+    }
+}
