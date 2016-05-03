@@ -11,17 +11,21 @@ router.get('/', function(req, res) {
     //     res.json(docs);
     // });
     res.json({
-        Champ1: {
-            name: "Champ1",
-            champ: "Varus"
+        Varus: {
+            name: "Varus",
+            description: "Zoefzoef pijlen skieten!"
         },
-        Champ2: {
-            name: "Champ2",
-            champ: "Teemo"
+        Teemo: {
+            name: "Teemo",
+            description: "Ik ben een levende hell! Up, 2, 3, 4."
         },
-        Champ3: {
-            name: "Champ3",
-            champ: "Galio"
+        Galio: {
+            name: "Galio",
+            description: "Nobody likes me anymore..."
+        },
+        Karthus: {
+            name: "Karthus",
+            description: "Ik kan niks, maar toch gaan er mensen dood."
         }
     });
 });
