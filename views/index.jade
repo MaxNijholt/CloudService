@@ -1,5 +1,60 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+        
+    nav.navbar.navbar-default( role="navigation" )
+        .navbar-header
+            a.navbar-brand()= title
+
+    .container-fluid
+        .row
+            .col-md-3
+                .panel.panel-default.loginPanel
+                    .panel-heading 
+                        h4 Login
+                    .panel-body 
+                        #login
+                        fieldset
+                            form-group
+                                input#usename(type='username', class="form-control", placeholder='Username')
+                            form-group
+                                input#password(type='password', class="form-control", placeholder='Password')
+                            button#login(type='submit', class="form-control btn btn-default") Login
+                            button#twitter(type='submit', class="form-control btn btn-default") Twitter
+                            button#facebook(type='submit', class="form-control btn btn-default") Facebook
+                            button#google(type='submit', class="form-control btn btn-default") Google
+                            
+            .col-md-3
+                .panel.panel-default
+                    .panel-heading 
+                        h4 Add Buddy
+                    .panel-body 
+                        #addBuddy
+                        fieldset
+                            form-group
+                                input#inputBuddyName(type='text', class="form-control", placeholder='Name')
+                            .dropdown
+                                button#inputBuddyChampion(type="button" class="btn.btn-default dropdown-toggle form-control" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true") Champion Select
+                                    span.caret
+                                ul(class="dropdown-menu dropdown-menu-right")
+                                    li 
+                                        a(href="#") Action
+                                    li 
+                                        a(href="#") Another action 
+                                    li 
+                                        a(href="#") Something else here 
+                                    li      
+                                        a(href="#") Action                          
+                            button#btnAddChampion(type='submit', class="form-control btn btn-default") Add Champion
+
+            .col-md-6      
+                .panel.panel-default
+                    .panel-heading 
+                        h4 Buddy List
+                    .panel-body 
+                        #buddyList
+                            table.table
+                                thead
+                                    th Name
+                                    th Champion
+                                tbody
