@@ -9,7 +9,7 @@ var buddySchema = new Schema({
         type: String,
         required: true,
         unique : true,
-        minlength: [5, 'Name too short'],
+        minlength: [2, 'Name too short'],
         maxlength: [20, 'Name too long']
     },
     champion: {
