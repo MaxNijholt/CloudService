@@ -32,8 +32,8 @@ var buddySchema = new Schema({
  * @param callback
  * @returns {Query|*|FindOperatorsUnordered|FindOperatorsOrdered|Cursor|T}
  */
-buddySchema.statics.findAll = function (callback) {
-    return this.find({}, callback);
+buddySchema.statics.findAll = function (filter, callback) {
+    return this.find(filter, callback);
 };
 
 /**
