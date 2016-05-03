@@ -1,0 +1,23 @@
+extends layout
+
+block content
+        
+    nav.navbar.navbar-default( role="navigation" )
+        .navbar-header
+            a.navbar-brand()= title
+
+    .container-fluid
+        .row
+            .col-md-12      
+                .panel.panel-default
+                    .panel-heading 
+                        h4 API HELP
+                    .panel-body 
+                        #urlList
+                            table.table
+                                thead
+                                    th Name
+                                    th URL
+                                    th Description
+                                tbody
+        

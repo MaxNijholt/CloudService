@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
+var help = require('./routes/Help');
 var buddies = require('./routes/Buddies');
 var champions = require('./routes/Champions');
 
@@ -33,6 +34,7 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', routes);
+app.use('/Help', help);
 app.use('/Buddies', buddies);
 app.use('/Champions', champions);
 
