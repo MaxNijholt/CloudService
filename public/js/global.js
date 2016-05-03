@@ -62,7 +62,30 @@ functions.addBuddy = function() {
     var champion = $('#inputBuddyChampion').val();
     
     if(name && champion){
-        console.log("good");
-        console.log(name + " " + champion);
+        var buddy = {
+            name: name,
+            champion: champion,
+            username: "Bram"
+        }
+        
+        $.ajax({
+            type: 'POST',
+            data: buddy,
+            url: '/Buddies',
+            dataType: 'JSON'
+        }).done(function(response) {            
+            //Check for succesful (blank) response
+            if(response.msg === '') {                
+                //Clear the form inputs
+                $('#inputBuddyName').val('');
+                $('#inputBuddyChampion').val('');
+                
+                //Update the table
+                functions.getAllBuddies();
+            }else{                
+                //If something goes wrong, alert the error message that our service returned
+                alert('Error: ' + response.msg);
+            }
+        });
     }
 }

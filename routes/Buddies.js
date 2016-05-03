@@ -18,9 +18,10 @@ router.get('/', function(req, res) {
 router.post('/', function(req, res) {
     var buddy = new Buddy(req.body);
 
-    buddy.save(function(err, buddy) {
-        if (err) return console.error(err);
-        res.json(buddy);
+    buddy.save(function(err) {
+        res.send(
+            (err === null) ? { msg: '' } : { msg: err }
+        );
     });
 });
 
@@ -28,9 +29,10 @@ router.post('/', function(req, res) {
  * DELETE to buddies.
  */
 router.delete('/:name', function(req, res) {
-    Buddy.remove({ name: req.params.name }, function(err, buddy) {
-        if (err) return console.error(err);
-        res.json(buddy);
+    Buddy.remove({ name: req.params.name }, function(err) {
+        res.send(
+            (err === null) ? { msg: '' } : { msg: err }
+        );
     });
 });
 
@@ -41,9 +43,10 @@ router.put('/:name', function(req, res) {
     var query = { name: req.params.name };
     var values = req.body;
     var options = { multi: false };
-    Buddy.update(query, values, options, function(err, buddy) {
-        if (err) return console.error(err);
-        res.json(buddy);
+    Buddy.update(query, values, options, function(err) {
+        res.send(
+            (err === null) ? { msg: '' } : { msg: err }
+        );
     });
 });
 
