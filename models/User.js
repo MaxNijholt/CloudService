@@ -14,7 +14,17 @@ var userSchema = new Schema({
         maxlength: [20, 'Username too long']
     },
     password: String,
-    token: String
+    token: String,
+    facebook : {
+        id : String,
+        token : String,
+    },
+    google : {
+        id : String,
+        token : String,
+        email : String,
+        name : String
+    }
 });
 
 /**
@@ -97,6 +107,7 @@ userSchema.methods.generateToken = function () {
 
     this.token = text;
 };
+
 
 // apply auto-increment
 userSchema.plugin(autoIncrement.plugin, 'User');

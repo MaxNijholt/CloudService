@@ -33,7 +33,7 @@ class Auth extends Base {
         app.get('/auth/facebook', passport.authenticate('facebook'));
 
         app.get('/auth/facebook/callback', 
-            passport.authenticate('facebook', { failureRedirect: '/login' }),
+            passport.authenticate('facebook', { failureRedirect: '/', session: false }),
             function(req, res) {
             // Successful authentication, redirect home.
             res.redirect('/');
@@ -43,7 +43,7 @@ class Auth extends Base {
         app.get('/auth/twitter', passport.authenticate('twitter'));
 
         app.get('/auth/twitter/callback', 
-            passport.authenticate('twitter', { failureRedirect: '/login' }),
+            passport.authenticate('twitter', { failureRedirect: '/',session: false  }),
             function(req, res) {
             // Successful authentication, redirect home.
             res.redirect('/');
@@ -52,7 +52,7 @@ class Auth extends Base {
         app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
 
         app.get('/auth/google/callback', 
-            passport.authenticate('google', { failureRedirect: '/login' }),
+            passport.authenticate('google', { failureRedirect: '/', session: false }),
             function(req, res) {
             // Successful authentication, redirect home.
             res.redirect('/');
