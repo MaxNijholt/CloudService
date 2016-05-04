@@ -49,6 +49,7 @@ functions.getAllBuddies = function() {
             tableContent += '<td>' + this.champion + '</td>';
             tableContent += '<td>' + this.username + '</td>';
             tableContent += '<td>' + this.date + '</td>';
+            tableContent += '<td><button class="btn btn-warning" type="submit" onclick="functions.editChampion(&quot;' + this.name + '&quot;)">Edit</button><button class="btn btn-danger" type="submit" onclick="functions.deleteChampion(&quot;' + this.name + '&quot;)">Delete</button></td>';
             tableContent += '</tr>';
         });
 
@@ -92,4 +93,23 @@ functions.addBuddy = function() {
     
 functions.fillChampion = function(Champion) {
     $('#inputBuddyChampion').val(Champion);
+}
+
+functions.editChampion = function(Champion) {
+    alert(Champion);
+}
+
+functions.deleteChampion = function(Champion) {
+    $.ajax({
+        type: 'DELETE',
+        url: '/Buddies/' + Champion
+    }).done(function(response) {            
+        //Check for succesful (blank) response
+        if(response.msg === '') {
+            functions.getAllBuddies();
+        }else{
+            //If something goes wrong, alert the error message that our service returned
+            alert('Error: ' + response.msg);
+        }
+    });
 }
