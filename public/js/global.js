@@ -25,7 +25,7 @@ functions.getAllChampions = function() {
         // For each item in our JSON, add a table row and cells to the content string
         $.each(data, function(){
             tableContent += '<tr>';
-            tableContent += '<td>' + this.name + '</td>';
+            tableContent += '<td><a onclick="functions.fillChampion(&quot;' + this.name + '&quot;)">' + this.name + '</a></td>';
             tableContent += '<td>' + this.title + '</td>';
             tableContent += '</tr>';
         });
@@ -88,4 +88,8 @@ functions.addBuddy = function() {
             }
         });
     }
+}
+    
+functions.fillChampion = function(Champion) {
+    $('#inputBuddyChampion').val(Champion);
 }
