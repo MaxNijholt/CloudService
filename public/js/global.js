@@ -7,6 +7,12 @@ $(document).ready(function() {
     // Add Buddy button click
     $('#btnAddBuddy').on('click', functions.addBuddy);
     
+    // Edit Buddy button click
+    $('#btnEditBuddy').on('click', functions.editBuddy);
+    
+    // Clear Buddy button click
+    $('#btnClearBuddy').on('click', functions.clearBuddy);
+    
     // Username link click
     // $('#roomList table tbody').on('click', 'td a.linkshowroom', goToRoom);
     
@@ -49,7 +55,7 @@ functions.getAllBuddies = function() {
             tableContent += '<td>' + this.champion + '</td>';
             tableContent += '<td>' + this.username + '</td>';
             tableContent += '<td>' + this.date + '</td>';
-            tableContent += '<td><button class="btn btn-warning" type="submit" onclick="functions.editChampion(&quot;' + this.name + '&quot;)">Edit</button><button class="btn btn-danger" type="submit" onclick="functions.deleteChampion(&quot;' + this.name + '&quot;)">Delete</button></td>';
+            tableContent += '<td><button class="btn btn-warning" type="submit" onclick="functions.editChampion(&quot;' + this.name + '&quot;,&quot;' + this.champion + '&quot;)">Edit</button><button class="btn btn-danger" type="submit" onclick="functions.deleteChampion(&quot;' + this.name + '&quot;)">Delete</button></td>';
             tableContent += '</tr>';
         });
 
@@ -85,19 +91,31 @@ functions.addBuddy = function() {
                 functions.getAllBuddies();
             }else{                
                 //If something goes wrong, alert the error message that our service returned
-                alert('Error: ' + response.msg);
+                console.log('Error: ' + response.msg.errmsg);
+                alert("Can't add buddy.");
             }
         });
     }
-}
+};
+
+functions.editBuddy = function(){
+    var name = $('#inputBuddyName').val();
+    var champion = $('#inputBuddyChampion').val();
+};
+    
+functions.clearBuddy = function(){
+    $('#inputBuddyName').val('');
+    $('#inputBuddyChampion').val('');
+};
     
 functions.fillChampion = function(Champion) {
     $('#inputBuddyChampion').val(Champion);
-}
+};
 
-functions.editChampion = function(Champion) {
-    alert(Champion);
-}
+functions.editChampion = function(name, champion) {
+    $('#inputBuddyName').val(name);
+    $('#inputBuddyChampion').val(champion);
+};
 
 functions.deleteChampion = function(Champion) {
     $.ajax({
@@ -112,4 +130,4 @@ functions.deleteChampion = function(Champion) {
             alert('Error: ' + response.msg);
         }
     });
-}
+};
