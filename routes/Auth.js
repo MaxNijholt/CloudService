@@ -7,7 +7,7 @@ var passport = require('../lib/passport');
 var User = require('../models/User');
 
 class Auth extends Base {
-
+ 
     /**
      * Authentication class
      * Dealing with user login and logouts
@@ -52,6 +52,13 @@ class Auth extends Base {
           req.logout();
           res.redirect('/');
         });
+        
+        // app.post('/login',
+        //     passport.authenticate('local', { failureRedirect: '/'}),
+        //     function(req, res) {
+        //     // Successful authentication, redirect home.
+        //     res.redirect('/');
+        // });
     }
 
     /**
