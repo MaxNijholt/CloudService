@@ -16,6 +16,19 @@ router.get('/', function(req, res) {
     });
 });
 
+router.get('/me', function(req,res){
+    if(req.user){
+        res.json(req.user);
+    } else {
+        var err = {'message': 'Acces denied. You need to be logged in first.'};
+        res.status(403);
+        res.render('error', {
+            message: err.message,
+            error: {}
+        });
+    }
+});
+
 /*
  * GET user with given name.
  */
