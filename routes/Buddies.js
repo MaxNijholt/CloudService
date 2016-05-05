@@ -12,7 +12,6 @@ router.use(queryHandler.pagination({limit: 25}));
 router.get('/', function(req, res) {
     var filter = {};
     var options = req.options;
-    console.log(req.options);
     
     if(req.where.champion){
         filter.champion = req.where.champion;

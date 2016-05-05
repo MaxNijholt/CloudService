@@ -20,6 +20,7 @@
     "passport-accesstoken": "^0.1.0",
     "passport-local": "^1.0.0",
     "request-json": "^0.5.6",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "socket.io": "^1.4.6"
   }
 }

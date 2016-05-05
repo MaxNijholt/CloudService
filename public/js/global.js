@@ -1,3 +1,5 @@
+var socket = io();
+
 $(document).ready(function() {
 
     // Populate the room table on initial page load

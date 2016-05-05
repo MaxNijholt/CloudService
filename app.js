@@ -12,6 +12,13 @@ var users = require('./routes/Users');
 var champions = require('./routes/Champions');
 
 var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
+io.on('connection', function(socket){
+  console.log('a user connected');
+});
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
