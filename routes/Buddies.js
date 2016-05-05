@@ -40,38 +40,45 @@ router.get('/', function(req, res) {
  */
 router.post('/', function(req, res) {
     var buddy = new Buddy(req.body);
-
-    buddy.save(function(err) {
-        res.send(
-            (err === null) ? { msg: '' } : { msg: err }
-        );
-    });
+    if(req.user && req.user.username == buddy.username){
+        buddy.save(function(err) {
+            res.send(
+                (err === null) ? { msg: '' } : { msg: err }
+            );
+        }); 
+    } else {
+        var err = {'message': 'Acces denied. Users do not match.'};
+        res.status(403);
+        res.render('error', {
+            message: err.message,
+            error: {}
+        });
+    }
 });
 
 /*
  * DELETE to buddies.
  */
 router.delete('/:name', function(req, res) {
+    var buddyuser;
     Buddy.findByName(req.params.name, function(err, buddy){
         if (err) return console.error(err);
-        console.log(buddy);
-        buddyuser = buddy.username;
-    });
-    // if(req.user && req.user.username == Buddy.findByName({name: req.params.name}).username){
-    //     Buddy.remove({ name: req.params.name }, function(err) {
-    //         res.send(
-    //             (err === null) ? { msg: '' } : { msg: err }
-    //         );
-    //     });
-    // } else {
-    //     var err = {'message': 'Acces denied. You are not the User of this budy'};
-    //     res.status(403);
-    //     res.render('error', {
-    //         message: err.message,
-    //         error: {}
-    //     });
-    // }
-    
+        buddyuser = buddy[0].username;
+        if(req.user && req.user.username == buddyuser){
+            Buddy.remove({ name: req.params.name }, function(err) {
+                res.send(
+                    (err === null) ? { msg: '' } : { msg: err }
+                );
+            });
+        } else {
+            var err = {'message': 'Acces denied. You are not the User of this budy'};
+            res.status(403);
+            res.render('error', {
+                message: err.message,
+                error: {}
+            });
+        }
+    });   
 });
 
 /*
@@ -81,11 +88,21 @@ router.put('/:name', function(req, res) {
     var query = { name: req.params.name };
     var values = req.body;
     var options = { multi: false };
-    Buddy.update(query, values, options, function(err) {
-        res.send(
-            (err === null) ? { msg: '' } : { msg: err }
-        );
-    });
+    if(req.user && req.user.username == values.username){
+        console.log(values);
+        Buddy.update(query, values, options, function(err) {
+            res.send(
+                (err === null) ? { msg: '' } : { msg: err }
+            );
+        });
+    } else {
+        var err = {'message': 'Acces denied. You are not the User of this budy'};
+        res.status(403);
+        res.render('error', {
+            message: err.message,
+            error: {}
+        });
+    }
 });
 
 /*
