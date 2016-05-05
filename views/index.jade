@@ -46,7 +46,12 @@ block content
                                                 .help-block Either choose a champion from the list, or make up your own champion.                                                                                        
                                         .form-group
                                             .col-sm-12
-                                                button#btnAddChampion(type='submit', class="form-control btn btn-default") Add Champion
+                                                button#btnAddBuddy(type='submit', class="form-control btn btn-default") Add Buddy
+                                        .form-group                                           
+                                            .col-sm-6
+                                                button#btnEditBuddy(type='submit', class="form-control btn btn-default") Edit Buddy
+                                            .col-sm-6
+                                                button#btnClearBuddy(type='submit', class="form-control btn btn-default") Clear Fields
                 .row
                     .col-md-12      
                         .panel.panel-default
@@ -60,6 +65,7 @@ block content
                                             th Champion
                                             th User
                                             th Created
+                                            th Actions
                                         tbody
             .col-md-6      
                 .panel.panel-default
