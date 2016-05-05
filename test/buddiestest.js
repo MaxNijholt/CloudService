@@ -40,5 +40,26 @@ describe('Testing buddies route', function(){
 			});
 		});
 	});
+    
+    describe('with invalid params', function(){
+		it('should return 400 when name is invalid', function(done){
+			makeRequest('/Sukkel', 400, done);
+		});
+	});
+    
+    describe('with valid params', function(){
+		it('should return the right buddy', function(done){
+			makeRequest('/Champ1', 200, function(err, res){
+				if(err){ return done(err); }
+
+				expect(res.body).to.have.property('name');
+                expect(res.body).to.have.property('champion');
+				expect(res.body).to.have.property('username');
+				expect(res.body).to.have.property('date');
+				expect(res.body.date).to.equal('2016-05-03T09:02:26.837Z');
+				done();
+			});
+		});
+	});
 });
 
