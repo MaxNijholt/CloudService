@@ -37,32 +37,33 @@ block content
                                     a(href="/auth/google", class="btn btn-block btn-social btn-google")
                                         i(class="fa fa-google") 
                                         span Sign in with Google
-                                        
-                    .col-md-6
-                        .panel.panel-default
-                            .panel-heading 
-                                h4 Add Buddy
-                            .panel-body 
-                                #addBuddy
-                                fieldset
-                                    .form-horizontal
-                                        .form-group
-                                            label.col-sm-2 Name
-                                            .col-sm-10
-                                                input#inputBuddyName(type='text', class="form-control", placeholder='Name')
-                                        .form-group
-                                            label.col-sm-2 Champion
-                                            .col-sm-10
-                                                input#inputBuddyChampion(type='text', class="form-control", placeholder='Champion')  
-                                                .help-block Either choose a champion from the list, or make up your own champion.                                                                                        
-                                        .form-group
-                                            .col-sm-12
-                                                button#btnAddBuddy(type='submit', class="form-control btn btn-default") Add Buddy
-                                        .form-group                                           
-                                            .col-sm-6
-                                                button#btnEditBuddy(type='submit', class="form-control btn btn-default") Edit Buddy
-                                            .col-sm-6
-                                                button#btnClearBuddy(type='submit', class="form-control btn btn-default") Clear Fields
+                    
+                    if user                    
+                        .col-md-6
+                            .panel.panel-default
+                                .panel-heading 
+                                    h4 Add Buddy
+                                .panel-body 
+                                    #addBuddy
+                                    fieldset
+                                        .form-horizontal
+                                            .form-group
+                                                label.col-sm-2 Name
+                                                .col-sm-10
+                                                    input#inputBuddyName(type='text', class="form-control", placeholder='Name')
+                                            .form-group
+                                                label.col-sm-2 Champion
+                                                .col-sm-10
+                                                    input#inputBuddyChampion(type='text', class="form-control", placeholder='Champion')  
+                                                    .help-block Either choose a champion from the list, or make up your own champion.
+                                            .form-group
+                                                .col-sm-12
+                                                    button#btnAddBuddy(type='submit', class="form-control btn btn-default") Add Buddy
+                                            .form-group                                           
+                                                .col-sm-6
+                                                    button#btnEditBuddy(type='submit', class="form-control btn btn-default") Edit Buddy
+                                                .col-sm-6
+                                                    button#btnClearBuddy(type='submit', class="form-control btn btn-default") Clear Fields
                 .row
                     .col-md-12      
                         .panel.panel-default
@@ -76,7 +77,8 @@ block content
                                             th Champion
                                             th User
                                             th Created
-                                            th Actions
+                                            if user
+                                                th Actions
                                         tbody
             .col-md-6      
                 .panel.panel-default

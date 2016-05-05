@@ -52,11 +52,26 @@ router.post('/', function(req, res) {
  * DELETE to buddies.
  */
 router.delete('/:name', function(req, res) {
-    Buddy.remove({ name: req.params.name }, function(err) {
-        res.send(
-            (err === null) ? { msg: '' } : { msg: err }
-        );
+    Buddy.findByName(req.params.name, function(err, buddy){
+        if (err) return console.error(err);
+        console.log(buddy);
+        buddyuser = buddy.username;
     });
+    // if(req.user && req.user.username == Buddy.findByName({name: req.params.name}).username){
+    //     Buddy.remove({ name: req.params.name }, function(err) {
+    //         res.send(
+    //             (err === null) ? { msg: '' } : { msg: err }
+    //         );
+    //     });
+    // } else {
+    //     var err = {'message': 'Acces denied. You are not the User of this budy'};
+    //     res.status(403);
+    //     res.render('error', {
+    //         message: err.message,
+    //         error: {}
+    //     });
+    // }
+    
 });
 
 /*
