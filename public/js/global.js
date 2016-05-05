@@ -101,6 +101,35 @@ functions.addBuddy = function() {
 functions.editBuddy = function(){
     var name = $('#inputBuddyName').val();
     var champion = $('#inputBuddyChampion').val();
+    
+    if(name && champion){
+        var buddy = {
+            name: name,
+            champion: champion,
+            username: "Bram"
+        }
+        
+        $.ajax({
+            type: 'PUT',
+            data: buddy,
+            url: '/Buddies/' + name,
+            dataType: 'JSON'
+        }).done(function(response) {            
+            //Check for succesful (blank) response
+            if(response.msg === '') {                
+                //Clear the form inputs
+                $('#inputBuddyName').val('');
+                $('#inputBuddyChampion').val('');
+                
+                //Update the table
+                functions.getAllBuddies();
+            }else{                
+                //If something goes wrong, alert the error message that our service returned
+                console.log('Error: ' + response.msg.errmsg);
+                alert("Can't update buddy.");
+            }
+        });
+    }
 };
     
 functions.clearBuddy = function(){
