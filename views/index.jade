@@ -1,28 +1,39 @@
 extends layout
 
 block content
-        
+
     nav.navbar.navbar-default( role="navigation" )
         .navbar-header
             a.navbar-brand()= title
 
     .container-fluid
         .row
-            .col-md-6 
+            .col-md-6
                 .row
                     .col-md-6
-                        .panel.panel-default.loginPanel
-                            .panel-heading 
-                                h4 Login
-                            .panel-body 
-                                #login
-                                fieldset
-                                    form-group
-                                        input#usename(type='username', class="form-control", placeholder='Username')
-                                    form-group
-                                        input#password(type='password', class="form-control", placeholder='Password')
-                                    button#login(type='submit', class="form-control btn btn-default") Login
-                                    
+                        if user
+                            .panel.panel-default.loginPanel
+                                .panel-heading
+                                    h4 Profile
+                                .panel-body 
+                                    p.username Welcome #{user.username}
+                                    a(href="/logout", class="btn btn-block btn-default") Logout
+                        else
+                        
+                            .panel.panel-default.loginPanel
+                                .panel-heading
+                                    h4 Login
+                                .panel-body 
+                                    #login
+                                        
+                                    a(href="/auth/facebook", class="btn btn-block btn-social btn-facebook")
+                                        i(class="fa fa-facebook")
+                                        span Sign in with Facebook
+                                        
+                                    a(href="/auth/google", class="btn btn-block btn-social btn-google")
+                                        i(class="fa fa-google") 
+                                        span Sign in with Google
+                                        
                     .col-md-6
                         .panel.panel-default
                             .panel-heading 
@@ -43,29 +54,29 @@ block content
                                         .form-group
                                             .col-sm-12
                                                 button#btnAddChampion(type='submit', class="form-control btn btn-default") Add Champion
-                .row
-                    .col-md-12      
+                    .row
+                        .col-md-12      
+                            .panel.panel-default
+                                .panel-heading 
+                                    h4 Buddy List
+                                .panel-body 
+                                    #buddyList
+                                        table.table
+                                            thead
+                                                th Name
+                                                th Champion
+                                                th User
+                                                th Created
+                                            tbody
+                    .col-md-6      
                         .panel.panel-default
                             .panel-heading 
-                                h4 Buddy List
+                                h4 Champions
                             .panel-body 
-                                #buddyList
+                                #championsList
                                     table.table
                                         thead
                                             th Name
-                                            th Champion
-                                            th User
-                                            th Created
+                                            th Title
                                         tbody
-            .col-md-6      
-                .panel.panel-default
-                    .panel-heading 
-                        h4 Champions
-                    .panel-body 
-                        #championsList
-                            table.table
-                                thead
-                                    th Name
-                                    th Title
-                                tbody
         

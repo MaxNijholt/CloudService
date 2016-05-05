@@ -9,12 +9,20 @@ const tokenLength = 50;
 var userSchema = new Schema({
     username: {
         type: String,
-        required: true,
-        minlength: [5, 'Username too short'],
+     //   required: true,
+        minlength: [4, 'Username too short'],
         maxlength: [20, 'Username too long']
     },
     password: String,
-    token: String
+    facebook : {
+        id : String,
+        token : String,
+    },
+    google : {
+        id : String,
+        token : String,
+        email : String
+    }
 });
 
 /**
@@ -76,27 +84,6 @@ userSchema.methods.validPassword = function (password, successCallback, failureC
     });
 };
 
-/**
- * Token validation
- * @param token
- * @returns {boolean}
- */
-userSchema.methods.verifyToken = function (token) {
-    return token.length == tokenLength && this.token == token;
-};
-
-/**
- * Generate a new access token
- */
-userSchema.methods.generateToken = function () {
-    var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-    for (var i = 0; i < tokenLength; i++)
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-    this.token = text;
-};
 
 // apply auto-increment
 userSchema.plugin(autoIncrement.plugin, 'User');
