@@ -7,7 +7,27 @@ var Buddy = require('../models/Buddy');
 router.use(queryHandler.filter());
 
 /*
- * GET buddies.
+ * GET users.
+ */
+router.get('/', function(req, res) {
+    User.findUsers(function(err, buddies){
+        if (err) return console.error(err);
+        res.json(buddies);
+    });
+});
+
+/*
+ * GET user with given name.
+ */
+router.get('/:username', function(req, res) {
+    User.findByUsername(req.params.username, function(err, buddies){
+        if (err) return console.error(err);
+        res.json(buddies);
+    });
+});
+
+/*
+ * GET buddies from user with given name.
  */
 router.get('/:username/Buddies', function(req, res) {
     var filter = {};
