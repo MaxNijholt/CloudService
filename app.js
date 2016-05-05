@@ -7,7 +7,9 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 
 var routes = require('./routes/index');
+var help = require('./routes/Help');
 var buddies = require('./routes/Buddies');
+var users = require('./routes/Users');
 var champions = require('./routes/Champions');
 
 var app = express();
@@ -39,7 +41,9 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', routes);
+app.use('/Help', help);
 app.use('/Buddies', buddies);
+app.use('/Users', users);
 app.use('/Champions', champions);
 
 new (require('./routes/Auth'))(app);

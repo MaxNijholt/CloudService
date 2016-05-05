@@ -4,7 +4,11 @@ block content
 
     nav.navbar.navbar-default( role="navigation" )
         .navbar-header
-            a.navbar-brand()= title
+            a.navbar-brand()= title            
+        .collapse.navbar-collapse.navbar-right
+            ul.nav.navbar-nav
+                li
+                    a(href="/help") Help
 
     .container-fluid
         .row
@@ -53,30 +57,36 @@ block content
                                                 .help-block Either choose a champion from the list, or make up your own champion.                                                                                        
                                         .form-group
                                             .col-sm-12
-                                                button#btnAddChampion(type='submit', class="form-control btn btn-default") Add Champion
-                    .row
-                        .col-md-12      
-                            .panel.panel-default
-                                .panel-heading 
-                                    h4 Buddy List
-                                .panel-body 
-                                    #buddyList
-                                        table.table
-                                            thead
-                                                th Name
-                                                th Champion
-                                                th User
-                                                th Created
-                                            tbody
-                    .col-md-6      
+                                                button#btnAddBuddy(type='submit', class="form-control btn btn-default") Add Buddy
+                                        .form-group                                           
+                                            .col-sm-6
+                                                button#btnEditBuddy(type='submit', class="form-control btn btn-default") Edit Buddy
+                                            .col-sm-6
+                                                button#btnClearBuddy(type='submit', class="form-control btn btn-default") Clear Fields
+                .row
+                    .col-md-12      
                         .panel.panel-default
                             .panel-heading 
-                                h4 Champions
+                                h4 Buddy List
                             .panel-body 
-                                #championsList
+                                #buddyList
                                     table.table
                                         thead
                                             th Name
-                                            th Title
+                                            th Champion
+                                            th User
+                                            th Created
+                                            th Actions
                                         tbody
+            .col-md-6      
+                .panel.panel-default
+                    .panel-heading 
+                        h4 Champions
+                    .panel-body 
+                        #championsList
+                            table.table
+                                thead
+                                    th Name
+                                    th Title
+                                tbody
         

@@ -31,6 +31,17 @@ var userSchema = new Schema({
  * @param callback
  * @returns {Query|*|FindOperatorsUnordered|FindOperatorsOrdered|Cursor|T}
  */
+userSchema.statics.findUsers = function (callback) {
+    return this.find({}, callback);
+};
+
+
+/**
+ * Return the first user which has the given username
+ * @param username
+ * @param callback
+ * @returns {Query|*|FindOperatorsUnordered|FindOperatorsOrdered|Cursor|T}
+ */
 userSchema.statics.findByUsername = function (username, callback) {
     return this.find({username: username}, callback);
 };

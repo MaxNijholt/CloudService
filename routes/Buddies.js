@@ -1,14 +1,37 @@
 var express = require('express');
+var queryHandler = require('express-api-queryhandler');
 var router = express.Router();
 var Buddy = require('../models/Buddy');
+
+router.use(queryHandler.filter());
+router.use(queryHandler.pagination({limit: 25}));
 
 /*
  * GET buddies.
  */
 router.get('/', function(req, res) {
-    Buddy.findAll(function(err, buddies){
+    var filter = {};
+    var options = req.options;
+    console.log(req.options);
+    
+    if(req.where.champion){
+        filter.champion = req.where.champion;
+    }
+    if(req.where.name){
+        filter.name = req.where.name;
+    }
+    if(req.where.username){
+        filter.username = req.where.username;
+    }
+    
+    Buddy.findAll(filter, options, function(err, buddies){
         if (err) return console.error(err);
-        res.json(buddies);
+        var response = {
+            filter : filter,
+            options: options,
+            data: buddies
+        }
+        res.json(response);
     });
 });
 
