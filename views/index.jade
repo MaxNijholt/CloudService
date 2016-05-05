@@ -1,7 +1,7 @@
 extends layout
 
 block content
-        
+
     nav.navbar.navbar-default( role="navigation" )
         .navbar-header
             a.navbar-brand()= title            
@@ -12,21 +12,32 @@ block content
 
     .container-fluid
         .row
-            .col-md-6 
+            .col-md-6
                 .row
                     .col-md-6
-                        .panel.panel-default.loginPanel
-                            .panel-heading 
-                                h4 Login
-                            .panel-body 
-                                #login
-                                fieldset
-                                    form-group
-                                        input#usename(type='username', class="form-control", placeholder='Username')
-                                    form-group
-                                        input#password(type='password', class="form-control", placeholder='Password')
-                                    button#login(type='submit', class="form-control btn btn-default") Login
-                                    
+                        if user
+                            .panel.panel-default.loginPanel
+                                .panel-heading
+                                    h4 Profile
+                                .panel-body 
+                                    p.username Welcome #{user.username}
+                                    a(href="/logout", class="btn btn-block btn-default") Logout
+                        else
+                        
+                            .panel.panel-default.loginPanel
+                                .panel-heading
+                                    h4 Login
+                                .panel-body 
+                                    #login
+                                        
+                                    a(href="/auth/facebook", class="btn btn-block btn-social btn-facebook")
+                                        i(class="fa fa-facebook")
+                                        span Sign in with Facebook
+                                        
+                                    a(href="/auth/google", class="btn btn-block btn-social btn-google")
+                                        i(class="fa fa-google") 
+                                        span Sign in with Google
+                                        
                     .col-md-6
                         .panel.panel-default
                             .panel-heading 
