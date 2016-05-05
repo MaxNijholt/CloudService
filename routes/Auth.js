@@ -22,9 +22,6 @@ class Auth extends Base {
             next();
         });
 
-        // add routes to router
-        this.resolve();
-
         // commit router to application
         app.use('/auth', router);
         
@@ -53,99 +50,6 @@ class Auth extends Base {
           res.redirect('/');
         });
         
-        // app.post('/login',
-        //     passport.authenticate('local', { failureRedirect: '/'}),
-        //     function(req, res) {
-        //     // Successful authentication, redirect home.
-        //     res.redirect('/');
-        // });
-    }
-
-    /**
-     * Resolve routes
-     */
-    resolve() {
-
-        // allow logging in
-        this.regRoute('post', '/login', [
-            'username', 'password'
-        ], [], this.postLogin.bind(this));
-
-        // allow registering
-        this.regRoute('post', '/users', [
-            'username', 'password'
-        ], [], this.postUser.bind(this));
-
-    }
-
-    /**
-     * Submit credentials in order to login
-     * @param request
-     * @param input
-     * @param response
-     */
-    postLogin(request, input, response) {
-        passport.authenticate('local', function (e, user, error, something) {
-            if (error) {
-                return response.json({
-                    success: false,
-                    message: 'invalid credentials'
-                });
-            }
-
-            // create new token
-            user.generateToken();
-            user.save();
-
-            // send success
-            response.json({
-                success: true,
-                data: {
-                    token: user.token
-                }
-            });
-        }).apply(this, [request, response]);
-    }
-
-    /**
-     * Submit new user
-     * @param request
-     * @param input
-     * @param response
-     */
-    postUser(request, input, response) {
-        User.usernameIsUnique(input['username'], function (error, success) {
-            if (success) {
-                // username is not duplicate
-
-                let user = new User({
-                    username: input['username'],
-                    token: ''
-                });
-
-                user.setPassword(input['password'], function (err) {
-                    user.save(function (err) {
-                        if (err) {
-                            return response.status(500).json({
-                                success: false
-                            });
-                        }
-
-                        response.json({
-                            success: true
-                        });
-                    });
-                });
-
-            } else {
-                // username is duplicate
-
-                response.status(409).json({
-                    success: false,
-                    message: 'Username is already chosen, please choose another one'
-                });
-            }
-        });
     }
 
 }

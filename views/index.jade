@@ -25,23 +25,14 @@ block content
                                     h4 Login
                                 .panel-body 
                                     #login
-                                    form(action='/login',method='post')
-                                        div(data-role='fieldcontain')
-                                            fieldset(data-role='controlgroup')
-                                                input#usename(type='username',name="username", class="form-control", placeholder='Username')
-                                        div#passworddiv(data-role='fieldcontain')
-                                            fieldset(data-role='controlgroup')
-                                                input#password(type='password',name="password", class="form-control", placeholder='Password')
-                                        div(data-role='fieldcontain')   
-                                            input(type='submit',value='Login', class="form-control btn btn-default")
-                                    
-                                    a(href="/register", class="btn btn-block btn-default") Register yourself
-                                            
-                                    a(href="/auth/facebook", class="btn btn-block btn-social btn-facebook").socialKnoppen
-                                        span(class="fa fa-facebook")  Sign in with Facebook
-
-                                    a(href="/auth/google", class="btn btn-block btn-social btn-google").socialKnoppen
-                                        span(class="fa fa-google")  Sign in with Google
+                                        
+                                    a(href="/auth/facebook", class="btn btn-block btn-social btn-facebook")
+                                        i(class="fa fa-facebook")
+                                        span Sign in with Facebook
+                                        
+                                    a(href="/auth/google", class="btn btn-block btn-social btn-google")
+                                        i(class="fa fa-google") 
+                                        span Sign in with Google
                                         
                     .col-md-6
                         .panel.panel-default
