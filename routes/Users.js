@@ -10,9 +10,9 @@ router.use(queryHandler.filter());
  * GET users.
  */
 router.get('/', function(req, res) {
-    User.findUsers(function(err, buddies){
+    User.findUsers(function(err, users){
         if (err) return console.error(err);
-        res.json(buddies);
+        res.json(users);
     });
 });
 
@@ -20,9 +20,13 @@ router.get('/', function(req, res) {
  * GET user with given name.
  */
 router.get('/:username', function(req, res) {
-    User.findByUsername(req.params.username, function(err, buddies){
+    User.findByUsername(req.params.username, function(err, users){
         if (err) return console.error(err);
-        res.json(buddies);
+        if(users.length == 0){
+            return res.status(400).end('Invalid username');
+        }else{
+            res.json(users);     
+        }
     });
 });
 
@@ -42,7 +46,11 @@ router.get('/:username/Buddies', function(req, res) {
     
     Buddy.findAll(filter, function(err, buddies){
         if (err) return console.error(err);
-        res.json(buddies);
+        if(buddies.length == 0){
+            return res.status(400).end('Invalid username');
+        }else{
+            res.json(buddies);     
+        }
     });
 });
 

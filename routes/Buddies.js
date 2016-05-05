@@ -79,7 +79,11 @@ router.put('/:name', function(req, res) {
 router.get('/:name', function(req, res) {
     Buddy.findByName(req.params.name, function(err, buddies){
         if (err) return console.error(err);
-        res.json(buddies);
+        if(buddies.length == 0){
+            return res.status(400).end('Invalid name');
+        }else{
+            res.json(buddies[0]);            
+        }
     });
 });
 
