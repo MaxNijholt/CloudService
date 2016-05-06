@@ -89,7 +89,6 @@ router.put('/:name', function(req, res) {
     var values = req.body;
     var options = { multi: false };
     if(req.user && req.user.username == values.username){
-        console.log(values);
         Buddy.update(query, values, options, function(err) {
             res.send(
                 (err === null) ? { msg: '' } : { msg: err }

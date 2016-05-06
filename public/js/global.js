@@ -20,6 +20,7 @@ $(document).ready(function() {
 
 // Functions =============================================================
 var functions = {};
+var currentEdit = null;
 // Fill table with data
 functions.getAllChampions = function() {
 
@@ -129,7 +130,7 @@ functions.editBuddy = function(){
                     $.ajax({
                         type: 'PUT',
                         data: buddy,
-                        url: '/Buddies/' + name,
+                        url: '/Buddies/' + currentEdit,
                         dataType: 'JSON'
                     }).done(function(response) {            
                         //Check for succesful (blank) response
@@ -160,6 +161,7 @@ functions.fillChampion = function(Champion) {
 };
 
 functions.editChampion = function(name, champion) {
+    currentEdit = name;
     $('#inputBuddyName').val(name);
     $('#inputBuddyChampion').val(champion);
 };
