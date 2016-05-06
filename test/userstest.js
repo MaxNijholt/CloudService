@@ -23,8 +23,10 @@ describe('Testing users route', function(){
 
 			makeRequest('/', 200, function(err, res){
 				if(err){ return done(err); }
-				expect(res.body[0]).to.have.property('_id');
-				expect(res.body[0]).to.have.property('username');
+				res.body.forEach(function(item){
+                    expect(item).to.have.property('_id');
+                    expect(item).to.have.property('username');
+                });
 				done();
 			});
 		});
@@ -56,14 +58,14 @@ describe('Testing users route', function(){
     
     describe('with valid params', function(){
 		it('should return a list of buddies from the right user', function(done){
-			makeRequest('/Bram/Buddies', 200, function(err, res){
+			makeRequest('/Bram%20Hendriks/Buddies', 200, function(err, res){
 				if(err){ return done(err); }
                 
                 res.body.forEach(function(item){
                     expect(item).to.have.property('name');
                     expect(item).to.have.property('champion');
                     expect(item).to.have.property('username');
-                    expect(item.username).to.equal('Bram');
+                    expect(item.username).to.equal('Bram Hendriks');
                 });
 				done();
 			});

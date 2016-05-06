@@ -49,7 +49,7 @@ describe('Testing buddies route', function(){
     
     describe('with valid params', function(){
 		it('should return the right buddy', function(done){
-			makeRequest('/Champ1', 200, function(err, res){
+			makeRequest('/TestChamp', 200, function(err, res){
 				if(err){ return done(err); }
 
 				expect(res.body).to.have.property('name');
