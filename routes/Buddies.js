@@ -87,7 +87,7 @@ router.delete('/:name', function(req, res) {
 router.put('/:name', function(req, res) {
     var query = { name: req.params.name };
     var values = req.body;
-    var options = { multi: false };
+    var options = { multi: false, runValidators: true };
     if(req.user && req.user.username == values.username){
         Buddy.update(query, values, options, function(err) {
             res.send(
