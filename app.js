@@ -4,10 +4,12 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var passport = require('passport');
 
 var routes = require('./routes/index');
 var help = require('./routes/Help');
 var buddies = require('./routes/Buddies');
+var users = require('./routes/Users');
 var champions = require('./routes/Champions');
 
 var app = express();
@@ -15,6 +17,11 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
+app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -36,6 +43,7 @@ app.use(function (req, res, next) {
 app.use('/', routes);
 app.use('/Help', help);
 app.use('/Buddies', buddies);
+app.use('/Users', users);
 app.use('/Champions', champions);
 
 new (require('./routes/Auth'))(app);

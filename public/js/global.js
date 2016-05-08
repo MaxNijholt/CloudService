@@ -20,6 +20,7 @@ $(document).ready(function() {
 
 // Functions =============================================================
 var functions = {};
+var currentEdit = null;
 // Fill table with data
 functions.getAllChampions = function() {
 
@@ -42,94 +43,112 @@ functions.getAllChampions = function() {
 };
 
 functions.getAllBuddies = function() {
-
+    var login = false;
     // Empty content string
     var tableContent = '';
+    $.ajax({type: 'GET', url: '/Users/me'})
+        .done(function(data){
+            login = true
+        }).always(function(){
+            // jQuery AJAX call for JSON
+            $.getJSON( '/Buddies', function( data ) {
+                // For each item in our JSON, add a table row and cells to the content string
+                $.each(data.data, function(){
+                    tableContent += '<tr>';
+                    tableContent += '<td>' + this.name + '</td>';
+                    tableContent += '<td>' + this.champion + '</td>';
+                    tableContent += '<td>' + this.username + '</td>';
+                    tableContent += '<td>' + this.date + '</td>';
+                    if(login){
+                        tableContent += '<td><button class="btn btn-warning" type="submit" onclick="functions.editChampion(&quot;' + this.name + '&quot;,&quot;' + this.champion + '&quot;)">Edit</button><button class="btn btn-danger" type="submit" onclick="functions.deleteChampion(&quot;' + this.name + '&quot;)">Delete</button></td>';
+                    }
+                    tableContent += '</tr>';
+                });
 
-    // jQuery AJAX call for JSON
-    $.getJSON( '/Buddies', function( data ) {
-        // For each item in our JSON, add a table row and cells to the content string
-        $.each(data, function(){
-            tableContent += '<tr>';
-            tableContent += '<td>' + this.name + '</td>';
-            tableContent += '<td>' + this.champion + '</td>';
-            tableContent += '<td>' + this.username + '</td>';
-            tableContent += '<td>' + this.date + '</td>';
-            tableContent += '<td><button class="btn btn-warning" type="submit" onclick="functions.editChampion(&quot;' + this.name + '&quot;,&quot;' + this.champion + '&quot;)">Edit</button><button class="btn btn-danger" type="submit" onclick="functions.deleteChampion(&quot;' + this.name + '&quot;)">Delete</button></td>';
-            tableContent += '</tr>';
+                // Inject the whole content string into our existing HTML table
+                $('#buddyList table tbody').html(tableContent);
+            });
         });
-
-        // Inject the whole content string into our existing HTML table
-        $('#buddyList table tbody').html(tableContent);
-    });
+    
 };
 
 functions.addBuddy = function() {
     var name = $('#inputBuddyName').val();
     var champion = $('#inputBuddyChampion').val();
+    var USR_name = null;
     
-    if(name && champion){
-        var buddy = {
-            name: name,
-            champion: champion,
-            username: "Bram"
-        }
-        
-        $.ajax({
-            type: 'POST',
-            data: buddy,
-            url: '/Buddies',
-            dataType: 'JSON'
-        }).done(function(response) {            
-            //Check for succesful (blank) response
-            if(response.msg === '') {                
-                //Clear the form inputs
-                $('#inputBuddyName').val('');
-                $('#inputBuddyChampion').val('');
-                
-                //Update the table
-                functions.getAllBuddies();
-            }else{                
-                //If something goes wrong, alert the error message that our service returned
-                console.log('Error: ' + response.msg.errmsg);
-                alert("Can't add buddy.");
+    $.ajax({type: 'GET', url: '/Users/me'})
+        .done(function(data){
+               USR_name = data.username;
+                if(name && champion && USR_name){
+                    var buddy = {
+                        name: name,
+                        champion: champion,
+                        username: USR_name
+                    }
+                    
+                    $.ajax({
+                        type: 'POST',
+                        data: buddy,
+                        url: '/Buddies',
+                        dataType: 'JSON'
+                    }).done(function(response) {            
+                        //Check for succesful (blank) response
+                        if(response.msg === '') {                
+                            //Clear the form inputs
+                            $('#inputBuddyName').val('');
+                            $('#inputBuddyChampion').val('');
+                            
+                            //Update the table
+                            functions.getAllBuddies();
+                        }else{                
+                            //If something goes wrong, alert the error message that our service returned
+                            console.log('Error: ' + response.msg.errmsg);
+                            alert("Can't add buddy.");
+                        }
+                    });
+                }
             }
-        });
-    }
+        );
 };
 
 functions.editBuddy = function(){
     var name = $('#inputBuddyName').val();
     var champion = $('#inputBuddyChampion').val();
+    var USR_name = null;
     
-    if(name && champion){
-        var buddy = {
-            name: name,
-            champion: champion,
-            username: "Bram"
-        }
-        
-        $.ajax({
-            type: 'PUT',
-            data: buddy,
-            url: '/Buddies/' + name,
-            dataType: 'JSON'
-        }).done(function(response) {            
-            //Check for succesful (blank) response
-            if(response.msg === '') {                
-                //Clear the form inputs
-                $('#inputBuddyName').val('');
-                $('#inputBuddyChampion').val('');
-                
-                //Update the table
-                functions.getAllBuddies();
-            }else{                
-                //If something goes wrong, alert the error message that our service returned
-                console.log('Error: ' + response.msg.errmsg);
-                alert("Can't update buddy.");
-            }
+    $.ajax({type: 'GET', url: '/Users/me'})
+        .done(function(data){
+               USR_name = data.username;
+                if(name && champion){
+                    var buddy = {
+                        name: name,
+                        champion: champion,
+                        username: USR_name
+                    }
+                    
+                    $.ajax({
+                        type: 'PUT',
+                        data: buddy,
+                        url: '/Buddies/' + currentEdit,
+                        dataType: 'JSON'
+                    }).done(function(response) {            
+                        //Check for succesful (blank) response
+                        if(response.msg === '') {                
+                            //Clear the form inputs
+                            $('#inputBuddyName').val('');
+                            $('#inputBuddyChampion').val('');
+                            
+                            //Update the table
+                            functions.getAllBuddies();
+                        }else{                
+                            //If something goes wrong, alert the error message that our service returned
+                            console.log('Error: ' + response.msg.errmsg);
+                            alert("Can't update buddy.");
+                        }
+                    });
+                }
         });
-    }
 };
     
 functions.clearBuddy = function(){
@@ -142,6 +161,7 @@ functions.fillChampion = function(Champion) {
 };
 
 functions.editChampion = function(name, champion) {
+    currentEdit = name;
     $('#inputBuddyName').val(name);
     $('#inputBuddyChampion').val(champion);
 };
